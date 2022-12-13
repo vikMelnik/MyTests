@@ -19,13 +19,15 @@ class EmailValidator : TextWatcher {
          * Паттерн для сравнения.
          */
         private val EMAIL_PATTERN = Pattern.compile(
-            "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-                    "\\@" +
-                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-                    "(" +
-                    "\\." +
-                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-                    ")+"
+            buildString {
+        append("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}")
+        append("\\@")
+        append("[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}")
+        append("(")
+        append("\\.")
+        append("[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}")
+        append(")+")
+    }
         )
         fun isValidEmail(email: CharSequence?): Boolean {
             return email != null && EMAIL_PATTERN.matcher(email).matches()
